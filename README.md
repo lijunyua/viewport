@@ -1,8 +1,8 @@
 # Viewport library example page
-https://salty-gorge-81057.herokuapp.com
+https://viewport-101.herokuapp.com/
 
 # Viewport library documentation page
-https://salty-gorge-81057.herokuapp.com/doc.html
+https://viewport-101.herokuapp.com/doc.html
 
 # Getting Started
 Download the Viewport folder, ensure both Viewport.js and style.css are in it.
