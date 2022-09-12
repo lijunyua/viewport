@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Viewport Demo</title>
+	<link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+	<h1 class="generalFormat centerText"> Viewport Documentation </h1>
+	<a href="https://salty-gorge-81057.herokuapp.com/">
+		<h4 class="generalFormat centerText"> Back to example page </h4>
+	</a>
+	<h2 class="generalFormat leftText"> Getting started </h2>
+	<p class="generalFormat centerText">
+		Download the Viewport folder, ensure both Viewport.js and style.css are in it. <br>
+		Place the folder at the same level of you HTML file. <br>
+		Use standard HTML and load the Viewport library:
+	</p>
+	<xmp class="generalFormat codeFormat centerContent" > 
+		<!DOCTYPE html>
+		<html lang="en">
+		<head>
+		    <meta charset="UTF-8">
+		    <title>Viewport Demo</title>
+		    <script defer type="text/javascript" src='./Viewport/Viewport.js'></script>
+		    <script defer type="text/javascript" src='./your_javascript_file.js'></script>
+		    <link rel="stylesheet" type="text/css" href="your_stylesheet.css">
+		</head>
+		<body>
+		  
+		</body>
+		</html>
+	</xmp>
+	<p class="generalFormat centerText">
+		You can modify img src below so it finds some images on your machine. <br>
+		Add this code to your HTML body:
+	</p>
+	<xmp class="generalFormat codeFormat centerContent" > 
+		<div id="myViewList">
+			<a href="https://www.google.com">
+				<img class="myView" src="./image/random-pic.jpg">
+			</a>
+			<img class="myView" src="./image/random-pic1.jpeg">
+			<img class="myView" src="./image/random-pic2.jpg">
+			<img class="myView" src="./image/random-pic3.jpg">
+			<img class="myView" src="./image/random-pic4.jpg">
+			<div class="myView">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut semper justo ut venenatis maximus.
+				Cras vestibulum urna dolor, ut aliquet ex vehicula nec. Morbi dictum est non arcu rutrum efficitur.
+				Integer in quam tincidunt, accumsan neque ac, varius libero. Proin aliquam nisi ante, vitae
+				ultricies lorem laoreet nec. Nam ut eros vulputate, pulvinar ipsum et, molestie libero. Curabitur
+				nec faucibus odio. Donec convallis vestibulum volutpat.
+			</div>
+		</div>
+	</xmp>
+	<p class="generalFormat centerText">
+		And this to your_javascript_file.js:
+	</p>
+	<xmp class="generalFormat codeFormat centerContent" > 
+		"use strict";
+		const viewport = new Viewport()
+		const myViewList = document.querySelector("#myViewList")
+		const allViews = document.querySelectorAll(".myView")
+		viewport.makeView(myViewList, allViews)
+	</xmp>
+	<p class="generalFormat centerText">
+		Refresh your HTML page and now you should see small blocks of your images and textboxes arranged.
+	</p>
+	<h2 class="generalFormat leftText"> API Methods</h2>
+	<b class="generalFormat leftText">
+		viewport.makeView(viewList, allViews, dimensions, setViewStyle, setHighlightStyle, setSelectStyle)
+	</b>
+	<pre class="generalFormat leftText">
+	  Creates Wrapper divs that wrap elements in <b>allViews</b> inside <b>viewList</b> and style these wrappers.
+
+	  viewList:          Required HTML element. 
+	                     Represents the element such that every element in it that is included in <b>allViews</b> would be styled.
+
+	  allViews:          Required HTML collection.
+	                     Represents the elements to be styled.
+
+	  dimensions:        Optional 2-dimensional array of integers.
+	                     Represents the defined width and height of each element.
+	                     Expected length is equal to the length of <b>allViews</b>.
+	                     Expected length of each sub-array is 2.
+	                     Default: 2-dimensional array with each sub-array [10, 10], with length equal to the length of <b>allViews</b>.
+
+	  setViewStyle:      Optional function which takes one parameter <b>wrapper</b>.
+	                     Applies this style to all elements in <b>allViews</b> inside <b>viewList</b> when no mouseover/mousedown occur.
+	                     Default:
+	                     function _setDefaultViewStyle(wrapper) {
+	                         wrapper.style.borderWidth = '8px'
+	                         wrapper.style.borderStyle = 'solid'
+	                         wrapper.style.borderColor = 'white'
+	                     }
+
+	  setHighlightStyle: Optional function which takes one parameter <b>wrapper</b>.
+	                     Applies this style to all elements in <b>allViews</b> inside <b>viewList</b> when no mouseover occur.
+	                     Default:
+	                         function _setDefaultViewStyle(wrapper) {
+	                             wrapper.style.borderColor = 'yellow'
+	                         }
+
+	  setSelectStyle:    Optional function which takes one parameter <b>wrapper</b>.
+	                     Applies this style to all elements in <b>allViews</b> inside <b>viewList</b> when mousedown occur.
+	                     Default:
+	                         function _setDefaultViewStyle(wrapper) {
+	                             wrapper.style.borderColor = 'green'
+	                         }
+	</pre>
+	<b class="generalFormat leftText">
+		viewport.makeViewClosable(viewList, closableViewList)
+	</b>
+	<pre class="generalFormat leftText">
+	  Call after makeView. Adds a close button to wrapper of each element in <b>closableViewList</b> inside <b>viewList</b>.
+
+	  viewList:          Required HTML element. 
+	                     Expected to be one that was used to call <b>makeView</b> successfully.
+
+	  closableViewList:  Required HTML collection.
+	                     Represents the elements to add a close button.
+	</pre>
+	<b class="generalFormat leftText">
+		viewport.makeViewReorderable(viewList, mode)
+	</b>
+	<pre class="generalFormat leftText">
+	  Call after makeView. Adds reordering functionality to 
+
+	  viewList:          Required HTML element.
+	                     Expected to be one that was used to call <b>makeView</b> successfully.
+
+	  mode:              Optional String.
+	                     Expected value is 'reorder' or 'swap'.
+	                     Default value is 'reorder'.
+	                     Represents the reordering method to use.
+	</pre>
+	<b class="generalFormat leftText">
+		viewport.setUpSaveAndResetButtons(viewList, buttons)
+	</b>
+	<pre class="generalFormat leftText">
+	  Call after makeView and makeViewReorderable. Adds save and reset functionality to elements in <b>buttons</b>.
+
+	  viewList:          Required HTML element.
+	                     Expected to be one that was used to call <b>makeView</b> and <b>makeViewReorderable</b> successfully.
+
+	  buttons:           Required 2-dimensional array of HTML elements.
+	                     Represents the buttons to add functionality to.
+	                     Expected length is equal to the length of <b>allViews</b>.
+	                     Expected length of each sub-array is 2.
+	                     In each subarray, the first button will be added save functionality.
+	                     In each subarray, the second button will be added reset functionality.
+	</pre>
+	<b class="generalFormat leftText">
+		viewport.setUpResetDefaultButton(viewList, button)
+	</b>
+	<pre class="generalFormat leftText">
+	  Call after makeView and makeViewReorderable. Adds reset default view functionality to <b>button</b>.
+
+	  viewList:          Required HTML element.
+	                     Expected to be one that was used to call <b>makeView</b> and <b>makeViewReorderable</b> successfully.
+
+	  buttons:           Required HTML element.
+	                     Represents the button to add functionality to.
+	</pre>
+	<b class="generalFormat leftText">
+		viewport.setUpChangeOrderingMethodButton(viewList, button)
+	</b>
+	<pre class="generalFormat leftText">
+	  Call after makeView and makeViewReorderable. Adds switch ordering method functionality to <b>button</b>.
+
+	  viewList:          Required HTML element.
+	                     Expected to be one that was used to call <b>makeView</b> and <b>makeViewReorderable</b> successfully.
+
+	  buttons:           Required HTML element.
+	                     Represents the button to add functionality to.
+	</pre>
+	<h1 class="generalFormat centerText"> Thank you! </h1>
+</body>
+</html>

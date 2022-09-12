@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Viewport Demo</title>
+
+	<script defer type="text/javascript" src='./Viewport/Viewport.js'></script>
+	<script defer type="text/javascript" src='./index.js'></script>
+	<link rel="stylesheet" type="text/css" href="index.css">
+
+</head>
+<body>
+	<h1 class="generalFormat centerText"> Create your dashboard with the Viewport JavaScript library! </h1>
+	<a href="https://salty-gorge-81057.herokuapp.com/doc.html">
+		<h4 class="generalFormat centerText"> Documentation </h4>
+	</a>
+	<p class="generalFormat centerText"> 
+		Try out the following dashboard with a mixture of features from this library! <br>
+		Drag and drop, close some views, save your current dashboard status and reset, reset default, change reordering method! <br>
+		Clicking on first image goes to Google by the way.
+	</p>
+	<div id="myViewList1" class="viewportPosition">
+		<a href="https://www.google.com">
+			<img alt="Google" class="myView1 myViewCloseButton1" src="./image/random-pic.jpg">
+		</a>
+		<img class="myView1 myViewCloseButton1" src="./image/random-pic1.jpeg">
+		<img class="myView1 myViewCloseButton1" src="./image/random-pic2.jpg">
+		<img class="myView1" src="./image/random-pic3.jpg">
+		<img class="myView1" src="./image/random-pic4.jpg">
+		<div class="myView1 myViewCloseButton1">
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut semper justo ut venenatis maximus. Cras vestibulum urna dolor, ut aliquet ex vehicula nec. Morbi dictum est non arcu rutrum efficitur. Integer in quam tincidunt, accumsan neque ac, varius libero. Proin aliquam nisi ante, vitae ultricies lorem laoreet nec. Nam ut eros vulputate, pulvinar ipsum et, molestie libero. Curabitur nec faucibus odio. Donec convallis vestibulum volutpat.
+		</div>
+	</div>
+	<div id="myViewList1Handler" class="centerContent">
+		<button id="myViewList1Save1" class="myButtonStyle"> Save 1 </button>
+		<button id="myViewList1Reset1" class="myButtonStyle"> Reset 1 </button>
+		<button id="myViewList1Save2" class="myButtonStyle"> Save 2 </button>
+		<button id="myViewList1Reset2" class="myButtonStyle"> Reset 2 </button>
+		<button id="myViewList1ResetDefault" class="myButtonStyle"> Reset Default </button>
+		<button id="myViewList1ChangeOrderingMethod" class="myButtonStyle"> Reordering: swap </button>
+	</div>
+
+	<p class="generalFormat centerText">
+		Now let's start with just making views. <br>
+		You can modify img src below so it finds some images on your machine. <br>
+		Here's the HTML:
+	</p>
+	<!-- source: https://stackoverflow.com/questions/2820453/display-html-snippets-in-html -->
+	<xmp class="generalFormat codeFormat centerContent" > 
+		<div id="myViewList2" class="viewportPosition">
+			<a href="https://www.google.com">
+				<img alt="Google" class="myView2" src="./image/random-pic.jpg">
+			</a>
+			<img class="myView2" src="./image/random-pic1.jpeg">
+			<img class="myView2" src="./image/random-pic2.jpg">
+			<img class="myView2" src="./image/random-pic3.jpg">
+			<img class="myView2" src="./image/random-pic4.jpg">
+			<div class="myView2">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut semper justo ut venenatis maximus.
+				Cras vestibulum urna dolor, ut aliquet ex vehicula nec. Morbi dictum est non arcu rutrum efficitur.
+				Integer in quam tincidunt, accumsan neque ac, varius libero. Proin aliquam nisi ante, vitae
+				ultricies lorem laoreet nec. Nam ut eros vulputate, pulvinar ipsum et, molestie libero. Curabitur
+				nec faucibus odio. Donec convallis vestibulum volutpat.
+			</div>
+		</div>
+	</xmp>
+	<p class="generalFormat centerText">
+		And here's the JavaScript:
+	</p>
+	<xmp class="generalFormat codeFormat centerContent" > 
+		const viewport = new Viewport()
+		const myViewList = document.querySelector("#myViewList2")
+		const allViews = document.querySelectorAll(".myView2")
+		viewport.makeView(myViewList, allViews)
+	</xmp>
+	<p class="generalFormat centerText">
+		You need a <b>ViewList</b> element containing all the <b>View</b>s you want to have in you dashboard. <br>
+		In the above example, the div with id <span>myViewList2</span> is the <b>ViewList</b>. <br>
+		Elements inside <span>myViewList2</span> with class <span>myView2</span> are <b>View</b>s that
+		belongs to it. <br>
+		You can optionally wrap a hyperlink around a <b>View</b>, but <strong>remember two Views cannot have the same parent other than the ViewList containing them. </strong> <br>
+		The following is then produced:
+	</p>
+	<div id="myViewList2" class="viewportPosition">
+		<a href="https://www.google.com">
+			<img alt="Google" class="myView2" src="./image/random-pic.jpg">
+		</a>
+		<img class="myView2" src="./image/random-pic1.jpeg">
+		<img class="myView2" src="./image/random-pic2.jpg">
+		<img class="myView2" src="./image/random-pic3.jpg">
+		<img class="myView2" src="./image/random-pic4.jpg">
+		<div class="myView2">
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut semper justo ut venenatis maximus.
+			Cras vestibulum urna dolor, ut aliquet ex vehicula nec. Morbi dictum est non arcu rutrum efficitur.
+			Integer in quam tincidunt, accumsan neque ac, varius libero. Proin aliquam nisi ante, vitae
+			ultricies lorem laoreet nec. Nam ut eros vulputate, pulvinar ipsum et, molestie libero. Curabitur
+			nec faucibus odio. Donec convallis vestibulum volutpat.
+		</div>
+	</div>
+	<p class="generalFormat centerText">
+		You can now make your <b>ViewList</b> reorderable after calling <b>makeView</b> as above. <br>
+		Add this line of JavaScript to the existing code above:
+	</p>
+	<xmp class="generalFormat codeFormat centerContent" > 
+		viewport.makeViewReorderable(myViewList, 'reorder')
+	</xmp>
+	<p class="generalFormat centerText">
+		Then you have:
+	</p>
+	<div id="myViewList3" class="viewportPosition">
+		<a href="https://www.google.com">
+			<img alt="Google" class="myView3" src="./image/random-pic.jpg">
+		</a>
+		<img class="myView3" src="./image/random-pic1.jpeg">
+		<img class="myView3" src="./image/random-pic2.jpg">
+		<img class="myView3" src="./image/random-pic3.jpg">
+		<img class="myView3" src="./image/random-pic4.jpg">
+		<div class="myView3">
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut semper justo ut venenatis maximus.
+			Cras vestibulum urna dolor, ut aliquet ex vehicula nec. Morbi dictum est non arcu rutrum efficitur.
+			Integer in quam tincidunt, accumsan neque ac, varius libero. Proin aliquam nisi ante, vitae
+			ultricies lorem laoreet nec. Nam ut eros vulputate, pulvinar ipsum et, molestie libero. Curabitur
+			nec faucibus odio. Donec convallis vestibulum volutpat.
+		</div>
+	</div>
+
+	<p class="generalFormat centerText">
+		If the reorder method feels confusing, add this instead:
+	</p>
+	<xmp class="generalFormat codeFormat centerContent" > 
+		viewport.makeViewReorderable(myViewList, 'swap')
+	</xmp>
+	<p class="generalFormat centerText">
+		Then you have swapping instead of default reordering:
+	</p>
+	<div id="myViewList4" class="viewportPosition">
+		<a href="https://www.google.com">
+			<img alt="Google" class="myView4" src="./image/random-pic.jpg">
+		</a>
+		<img class="myView4" src="./image/random-pic1.jpeg">
+		<img class="myView4" src="./image/random-pic2.jpg">
+		<img class="myView4" src="./image/random-pic3.jpg">
+		<img class="myView4" src="./image/random-pic4.jpg">
+		<div class="myView4">
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut semper justo ut venenatis maximus.
+			Cras vestibulum urna dolor, ut aliquet ex vehicula nec. Morbi dictum est non arcu rutrum efficitur.
+			Integer in quam tincidunt, accumsan neque ac, varius libero. Proin aliquam nisi ante, vitae
+			ultricies lorem laoreet nec. Nam ut eros vulputate, pulvinar ipsum et, molestie libero. Curabitur
+			nec faucibus odio. Donec convallis vestibulum volutpat.
+		</div>
+	</div>
+	<p class="generalFormat centerText">
+		With Reordering added, now you may want to go back and customize the style of your views. <br>
+		There are four optional parameters for makeView. The first is <b>Dimensions</b>:
+	</p>
+	<xmp class="generalFormat codeFormat centerContent" > 
+		const myViewList = document.querySelector("#myViewList5")
+		const allViews = document.querySelectorAll(".myView5")
+		myViewListDimensions = [[20, 20], [20, 20], [10, 10], [10, 10], [10, 10], [10, 10]]
+		viewport.makeView(myViewList, allViews, myViewListDimensions)
+		viewport.makeViewReorderable(myViewList, 'swap')
+	</xmp>
+	<p class="generalFormat centerText">
+		This means that the first view should be 20% width, 20% height and so on:
+	</p>
+	<div id="myViewList5" class="viewportPosition">
+		<a href="https://www.google.com">
+			<img alt="Google" class="myView5" src="./image/random-pic.jpg">
+		</a>
+		<img class="myView5" src="./image/random-pic1.jpeg">
+		<img class="myView5" src="./image/random-pic2.jpg">
+		<img class="myView5" src="./image/random-pic3.jpg">
+		<img class="myView5" src="./image/random-pic4.jpg">
+		<div class="myView5">
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut semper justo ut venenatis maximus.
+			Cras vestibulum urna dolor, ut aliquet ex vehicula nec. Morbi dictum est non arcu rutrum efficitur.
+			Integer in quam tincidunt, accumsan neque ac, varius libero. Proin aliquam nisi ante, vitae
+			ultricies lorem laoreet nec. Nam ut eros vulputate, pulvinar ipsum et, molestie libero. Curabitur
+			nec faucibus odio. Donec convallis vestibulum volutpat.
+		</div>
+	</div> <br><br><br><br><br><br><br><br><br><br><br><br>
+	<p class="generalFormat centerText">
+		You may wish to know that the default is 10% width and height for all Views.
+	</p>
+	<p class="generalFormat centerText">
+		You can also customize the styling of your views by passing in 3 function parameters that changes their styles:
+	</p>
+	<xmp class="generalFormat codeFormat centerContent" > 
+		const myViewList = document.querySelector("#myViewList6")
+		const allViews = document.querySelectorAll(".myView6")
+
+		function myViewStyle(wrapper) {
+			wrapper.style.opacity = 1
+		}
+		function myHighlightStyle(wrapper) {
+			wrapper.style.opacity = 0.1
+		}
+		function mySelectStyle(wrapper) {
+			wrapper.style.opacity = 0.6
+		}
+
+		viewport.makeView(myViewList, allViews, null, myViewStyle, myHighlightStyle, mySelectStyle)
+		viewport.makeViewReorderable(myViewList, 'swap')
+	</xmp>
+	<p class="generalFormat centerText">
+		now the default view style is <span>opacity = 1</span> which is not really changing anything. <br>
+		When you move your mouse over it, the style is <span>opacity = 0.1</span>. <br>
+		And when you click and hold it, the style changes to <span>opacity = 0.6</span>. <br>
+		Like so:
+	</p>
+	<div id="myViewList6" class="viewportPosition">
+		<a href="https://www.google.com">
+			<img alt="Google" class="myView6" src="./image/random-pic.jpg">
+		</a>
+		<img class="myView6" src="./image/random-pic1.jpeg">
+		<img class="myView6" src="./image/random-pic2.jpg">
+		<img class="myView6" src="./image/random-pic3.jpg">
+		<img class="myView6" src="./image/random-pic4.jpg">
+		<div class="myView6">
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut semper justo ut venenatis maximus.
+			Cras vestibulum urna dolor, ut aliquet ex vehicula nec. Morbi dictum est non arcu rutrum efficitur.
+			Integer in quam tincidunt, accumsan neque ac, varius libero. Proin aliquam nisi ante, vitae
+			ultricies lorem laoreet nec. Nam ut eros vulputate, pulvinar ipsum et, molestie libero. Curabitur
+			nec faucibus odio. Donec convallis vestibulum volutpat.
+		</div>
+	</div>
+	<p class="generalFormat centerText">
+		You may wish to know that the default style is made by the functions below:
+	</p>
+	<xmp class="generalFormat codeFormat centerContent" > 
+		function _setDefaultViewStyle(wrapper) {
+			wrapper.style.borderWidth = '8px'
+			wrapper.style.borderStyle = 'solid'
+			wrapper.style.borderColor = 'white'
+		}
+
+		function _setDefaultHighlightStyle(wrapper) {
+			wrapper.style.borderColor = 'yellow'
+		}
+
+		function _setDefaultSelectStyle(wrapper) {
+			wrapper.style.borderColor = 'green'
+		}
+	</xmp>
+	<p class="generalFormat centerText">
+		And remember that you might want to reset your style changes in the <span>myViewStyle</span> function. <br>
+		that are made in the other two functions.
+	</p>
+	<p class="generalFormat centerText">
+		To make your views closable with the little green "x" button on the top right, <br>
+		select the Views that you wish to make closable and pass into the <span>viewport.makeViewClosable</span>. <br>
+		Like So:
+	</p>
+	<xmp class="generalFormat codeFormat centerContent" > 
+		<div id="myViewList7" class="viewportPosition">
+			<a href="https://www.google.com">
+				<img alt="Google" class="myView7 myViewCloseButton7" src="./image/random-pic.jpg">
+			</a>
+			<img class="myView7" src="./image/random-pic1.jpeg">
+			<img class="myView7 myViewCloseButton7" src="./image/random-pic2.jpg">
+			<img class="myView7" src="./image/random-pic3.jpg">
+			<img class="myView7 myViewCloseButton7" src="./image/random-pic4.jpg">
+			<div class="myView7">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut semper justo ut venenatis maximus.
+				Cras vestibulum urna dolor, ut aliquet ex vehicula nec. Morbi dictum est non arcu rutrum efficitur.
+				Integer in quam tincidunt, accumsan neque ac, varius libero. Proin aliquam nisi ante, vitae
+				ultricies lorem laoreet nec. Nam ut eros vulputate, pulvinar ipsum et, molestie libero. Curabitur
+				nec faucibus odio. Donec convallis vestibulum volutpat.
+			</div>
+		</div>
+	</xmp>
+	<xmp class="generalFormat codeFormat centerContent" > 
+		const myViewList = document.querySelector("#myViewList7")
+		const allViews = document.querySelectorAll(".myView7")
+		const allViewsCloseButton = document.querySelectorAll(".myViewCloseButton7")
+		viewport.makeView(myViewList, allViews)
+		viewport.makeViewClosable(myViewList, allViewsCloseButton)
+	</xmp>
+	<p class="generalFormat centerText">
+		Then you have:
+	</p>
+	<div id="myViewList7" class="viewportPosition">
+		<a href="https://www.google.com">
+			<img alt="Google" class="myView7 myViewCloseButton7" src="./image/random-pic.jpg">
+		</a>
+		<img class="myView7" src="./image/random-pic1.jpeg">
+		<img class="myView7 myViewCloseButton7" src="./image/random-pic2.jpg">
+		<img class="myView7" src="./image/random-pic3.jpg">
+		<img class="myView7 myViewCloseButton7" src="./image/random-pic4.jpg">
+		<div class="myView7">
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut semper justo ut venenatis maximus.
+			Cras vestibulum urna dolor, ut aliquet ex vehicula nec. Morbi dictum est non arcu rutrum efficitur.
+			Integer in quam tincidunt, accumsan neque ac, varius libero. Proin aliquam nisi ante, vitae
+			ultricies lorem laoreet nec. Nam ut eros vulputate, pulvinar ipsum et, molestie libero. Curabitur
+			nec faucibus odio. Donec convallis vestibulum volutpat.
+		</div>
+	</div>
+	<p class="generalFormat centerText">
+		Now, you might want to remember the Views that are on screen and their order, and then later resets to it. <br>
+		You have the option to add as many save slots and reset buttons as you want. <br>
+		You can also add a reset default button in case you want it to go to the original state. <br>
+		Want to play with the two reordering methods? You can also add a button to switch between these. <br>
+		Use the following HTML and JavaScript code:
+	</p>
+	<xmp class="generalFormat codeFormat centerContent" > 
+		<div id="myViewList8" class="viewportPosition">
+			<a href="https://www.google.com">
+				<img alt="Google" class="myView8 myViewCloseButton8" src="./image/random-pic.jpg">
+			</a>
+			<img class="myView8" src="./image/random-pic1.jpeg">
+			<img class="myView8 myViewCloseButton8" src="./image/random-pic2.jpg">
+			<img class="myView8" src="./image/random-pic3.jpg">
+			<img class="myView8 myViewCloseButton8" src="./image/random-pic4.jpg">
+			<div class="myView8">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut semper justo ut venenatis maximus.
+				Cras vestibulum urna dolor, ut aliquet ex vehicula nec. Morbi dictum est non arcu rutrum efficitur.
+				Integer in quam tincidunt, accumsan neque ac, varius libero. Proin aliquam nisi ante, vitae
+				ultricies lorem laoreet nec. Nam ut eros vulputate, pulvinar ipsum et, molestie libero. Curabitur
+				nec faucibus odio. Donec convallis vestibulum volutpat.
+			</div>
+		</div>
+		<div id="myViewList8Handler" class="centerContent">
+			<button id="myViewList8Save1" class="myButtonStyle"> Save 1 </button>
+			<button id="myViewList8Reset1" class="myButtonStyle"> Reset 1 </button>
+			<button id="myViewList8Save2" class="myButtonStyle"> Save 2 </button>
+			<button id="myViewList8Reset2" class="myButtonStyle"> Reset 2 </button>
+			<button id="myViewList8Save3" class="myButtonStyle"> Save 3 </button>
+			<button id="myViewList8Reset3" class="myButtonStyle"> Reset 3 </button>
+			<button id="myViewList8ResetDefault" class="myButtonStyle"> Reset Default </button>
+			<button id="myViewList8ChangeOrderingMethod" class="myButtonStyle"> Reordering: swap </button>
+		</div>
+	</xmp>
+	<xmp class="generalFormat codeFormat centerContent" > 
+		const myViewList = document.querySelector("#myViewList8")
+		const allViews = document.querySelectorAll(".myView8")
+		const allViewsCloseButton = document.querySelectorAll(".myViewCloseButton8")
+
+		viewport.makeView(myViewList, allViews)
+		viewport.makeViewReorderable(myViewList, 'swap')
+		viewport.makeViewClosable(myViewList, allViewsCloseButton)
+
+		const myViewListSave1 = document.querySelector("#myViewList8Save1")
+		const myViewListReset1 = document.querySelector("#myViewList8Reset1")
+		const myViewListSave2 = document.querySelector("#myViewList8Save2")
+		const myViewListReset2 = document.querySelector("#myViewList8Reset2")
+		const myViewListSave3 = document.querySelector("#myViewList8Save3")
+		const myViewListReset3 = document.querySelector("#myViewList8Reset3")
+		const myViewListButtons = [[myViewListSave1, myViewListReset1],
+				           [myViewListSave2, myViewListReset2],
+					   [myViewListSave3, myViewListReset3]]
+
+		viewport.setUpSaveAndResetButtons(myViewList, myViewListButtons)
+
+		const myViewListResetDefault = document.querySelector("#myViewList8ResetDefault")
+		viewport.setUpResetDefaultButton(myViewList, myViewListResetDefault)
+
+		const myViewListChangeOrderingMethod = document.querySelector("#myViewList8ChangeOrderingMethod")
+		viewport.setUpChangeOrderingMethodButton(myViewList, myViewListChangeOrderingMethod)
+	</xmp>
+	<p class="generalFormat centerText">
+		Remember to arrange your buttons for save and reset in a 2D array. <br>
+		Then for each sub-array, the first element is the save button and the second is the reset button.
+	</p>
+	<p class="generalFormat centerText">
+		Then you have:
+	</p>
+	<div id="myViewList8" class="viewportPosition">
+		<a href="https://www.google.com">
+			<img alt="Google" class="myView8 myViewCloseButton8" src="./image/random-pic.jpg">
+		</a>
+		<img class="myView8" src="./image/random-pic1.jpeg">
+		<img class="myView8 myViewCloseButton8" src="./image/random-pic2.jpg">
+		<img class="myView8" src="./image/random-pic3.jpg">
+		<img class="myView8 myViewCloseButton8" src="./image/random-pic4.jpg">
+		<div class="myView8">
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut semper justo ut venenatis maximus.
+			Cras vestibulum urna dolor, ut aliquet ex vehicula nec. Morbi dictum est non arcu rutrum efficitur.
+			Integer in quam tincidunt, accumsan neque ac, varius libero. Proin aliquam nisi ante, vitae
+			ultricies lorem laoreet nec. Nam ut eros vulputate, pulvinar ipsum et, molestie libero. Curabitur
+			nec faucibus odio. Donec convallis vestibulum volutpat.
+		</div>
+	</div>
+	<div id="myViewList8Handler" class="centerContent">
+		<button id="myViewList8Save1" class="myButtonStyle"> Save 1 </button>
+		<button id="myViewList8Reset1" class="myButtonStyle"> Reset 1 </button>
+		<button id="myViewList8Save2" class="myButtonStyle"> Save 2 </button>
+		<button id="myViewList8Reset2" class="myButtonStyle"> Reset 2 </button>
+		<button id="myViewList8Save3" class="myButtonStyle"> Save 3 </button>
+		<button id="myViewList8Reset3" class="myButtonStyle"> Reset 3 </button>
+		<button id="myViewList8ResetDefault" class="myButtonStyle"> Reset Default </button>
+		<button id="myViewList8ChangeOrderingMethod" class="myButtonStyle"> Reordering: swap </button>
+	</div>
+	<p class="generalFormat centerText">
+		There you go! <br>
+		You have seen all features of the Viewport library. <br>
+		And here's the CSS code I've been using all along:
+	</p>
+	<xmp class="generalFormat codeFormat centerContent" > 
+		.myButtonStyle {
+			position: relative;
+			float: left;
+		}
+
+		.myButtonGroupStyle {
+			display: flex;
+			justify-content: center;
+		}
+		/* source: https://stackoverflow.com/questions/2820453/display-html-snippets-in-html */
+		.generalFormat {
+			font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, 
+						 DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+			margin-bottom: 10px;
+			overflow: auto;
+			width: auto;
+			padding: 5px;
+			width: 650px!ie7;
+			padding-bottom: 20px!ie7;
+			max-height: 600px;
+		}
+
+		.codeFormat {
+			background-color: #eee; 
+		}
+
+		.viewportPosition {
+			width: 90%; 
+			height: 20vh; 
+			margin-left: 22%; 
+			margin-right: 3%;
+		}
+
+		.centerContent {
+			display: flex; 
+			justify-content: center;
+		}
+
+		.centerText {
+			text-align: center;
+		}
+
+		.leftText {
+			text-align: left;
+			margin-left: 25%;
+		}
+
+		p span {
+			background-color: #eee; 
+		}
+	</xmp>
+	<h1 class="generalFormat centerText"> Thank you! </h1>
+</body>
+</html>

@@ -1,0 +1,50 @@
+.myButtonStyle {
+	position: relative;
+	float: left;
+}
+
+.myButtonGroupStyle {
+	display: flex;
+	justify-content: center;
+}
+/* source: https://stackoverflow.com/questions/2820453/display-html-snippets-in-html */
+.generalFormat {
+	font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, 
+				 DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+	margin-bottom: 10px;
+	overflow: auto;
+	width: auto;
+	padding: 5px;
+	width: 650px!ie7;
+	padding-bottom: 20px!ie7;
+	max-height: 600px;
+}
+
+.codeFormat {
+	background-color: #eee; 
+}
+
+.viewportPosition {
+	width: 90%; 
+	height: 20vh; 
+	margin-left: 22%; 
+	margin-right: 3%;
+}
+
+.centerContent {
+	display: flex; 
+	justify-content: center;
+}
+
+.centerText {
+	text-align: center;
+}
+
+.leftText {
+	text-align: left;
+	margin-left: 25%;
+}
+
+p span {
+	background-color: #eee; 
+}
